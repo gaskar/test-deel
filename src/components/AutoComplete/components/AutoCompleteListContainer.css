@@ -1,0 +1,13 @@
+.items-container {
+    list-style: none;
+    background-color: rgba(0, 0, 0, 0);
+    width: 100%;
+    max-height: 300px;
+    overflow: auto;
+    text-align: left;
+    padding: 0;
+    color: #21333b;
+    border: 1px solid #666;
+    position: absolute;
+    margin: 0;
+}

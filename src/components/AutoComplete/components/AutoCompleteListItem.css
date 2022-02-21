@@ -1,0 +1,10 @@
+li {
+    display: block;
+    padding: 6px;
+    border-bottom: 1px solid #666;
+    cursor: pointer;
+}
+
+li:hover {
+    background-color: rgb(204, 204, 204);
+}

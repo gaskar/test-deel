@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import AutoComplete from './components/AutoComplete/AutoComplete';
+import { getCountriesByNames } from './services/countries.service';
+
 
 function App() {
+  const [countries, setCountries] = useState<string[]>([]);
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
+
+  useEffect(() => {
+    getCountriesByNames("")
+      .then((countries: string[]) => {
+        setCountries(countries);
+      });
+  }, []);
+  
+  const handleFilterCountriesList = async (searchTerm: string) => {
+    const result = await getCountriesByNames(searchTerm);
+      
+    setCountries(result);
+  };
+
+  const handleSelectCountry = (country: string) => {
+    setSelectedCountry(country);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <pre>selected item: {selectedCountry}</pre>
+        <AutoComplete 
+          listItems={countries} 
+          onSearchTermChange={handleFilterCountriesList}
+          onItemSelected={handleSelectCountry}
+        />
     </div>
   );
 }
